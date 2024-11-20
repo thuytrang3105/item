@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Khách Hàng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h1>Thêm Khách Hàng</h1>
+    <form action="{{ url_for('add_customer') }}" method="POST">
+        <label for="name">Tên Khách Hàng:</label><br>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="phone">Số Điện Thoại:</label><br>
+        <input type="text" id="phone" name="phone" required><br><br>
+
+        <button type="submit">Thêm Khách Hàng</button>
+    </form>
+</body>
+</html>

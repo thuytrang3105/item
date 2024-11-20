@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Hóa Đơn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h1>Thêm Hóa Đơn</h1>
+    <form action="{{ url_for('add_invoice') }}" method="POST">
+        <label for="customer_id">Khách Hàng:</label><br>
+        <select id="customer_id" name="customer_id">
+            {% for customer in customers %}
+            <option value="{{ customer.id }}">{{ customer.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="medicine_id">Thuốc:</label><br>
+        <select id="medicine_id" name="medicine_id">
+            {% for medicine in medicines %}
+            <option value="{{ medicine.id }}">{{ medicine.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="quantity">Số Lượng:</label><br>
+        <input type="text" id="quantity" name="quantity" required><br><br>
+
+        <button type="submit">Thêm Hóa Đơn</button>
+    </form>
+</body>
+</html>
