@@ -19,8 +19,8 @@
         </tr>
         {% for invoice in invoices %}
         <tr>
-            <td>{{ invoice.customer.name }}</td>
-            <td>{{ invoice.medicine.name }}</td>
+            <td>{{ invoice.customer_name }}</td>
+            <td>{{ invoice.medicine_name }}</td>
             <td>{{ invoice.quantity }}</td>
             <td>{{ invoice.issue_date }}</td>
         </tr>

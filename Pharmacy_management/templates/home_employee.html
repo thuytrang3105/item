@@ -3,17 +3,15 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8">
-    <title>Trang Chủ - Quản Lý Nhà Thuốc</title>
+    <title>Trang Chủ</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>HỆ THỐNG QUẢN LÝ NHÀ THUỐC </h1>
         <div class="button-container">
-            <a href="{{ url_for('list_medicines') }}" class="button">Quản Lý Thuốc</a>
             <a href="{{ url_for('list_customers') }}" class="button">Quản Lý Khách Hàng</a>
             <a href="{{ url_for('list_invoices') }}" class="button">Quản Lý Hóa Đơn</a>
-            <a href="{{ url_for('revenue') }}" class="button">Báo Cáo Doanh Thu</a>
         </div>
     </div>
 </body>
