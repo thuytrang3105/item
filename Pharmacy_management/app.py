@@ -34,7 +34,10 @@ def login():
         if user and check_password_hash(user.password, password):
             login_user(user)
             flash('Đăng nhập thành công!', 'success')
-            return redirect(url_for('role_required'))
+            if user.role == 'manager':
+                return redirect(url_for('manage'))
+            elif user.role == 'employee':
+                return redirect(url_for('dashboard'))
         else:
             flash('Thông tin đăng nhập không hợp lệ', 'danger')
     return render_template('login.html')
@@ -64,7 +67,7 @@ def role_required(role):
 @login_required
 @role_required('manager')  # Chỉ quản lý có quyền
 def manage():
-    return render_template('home.html')
+    return render_template('home_manager.html')
 
 @app.route('/dashboard', methods=['GET'])
 @login_required
@@ -80,7 +83,15 @@ with app.app_context():
 @app.route('/')
 def home():
     return render_template('home.html')
+"""
+@app.route('/manager')
+def manager():
+    return render_template('home_manager.html')
 
+@app.route('/employee')
+def dashboard():
+    return render_template('home_employee.html')
+"""
 @app.route('/medicines')
 def list_medicines ():
     medicines = Medicine.query.all()
