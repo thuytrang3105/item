@@ -102,12 +102,16 @@ def dashboard():
     return render_template('home_employee.html')
 """
 @app.route('/medicines')
+@login_required
+@role_required('manager')
 def list_medicines ():
     medicines = Medicine.query.all()
     return render_template('list_medicines.html', medicines=medicines)
 
 #Thêm Thuốc
 @app.route('/add_medicine', methods=['GET', 'POST'])
+@login_required
+@role_required( 'manager')
 def add_medicine():
     if request.method == 'POST':
         name = request.form['name']
@@ -139,6 +143,8 @@ def add_medicine():
     return render_template('add_medicine.html')
 
 @app.route('/edit_medicine/<int:id>', methods=['GET', 'POST'])
+@login_required
+@role_required('manager')
 def edit_medicine(id):
     medicine = Medicine.query.get_or_404(id)
     description = ""  # Mặc định để rỗng nếu không tìm thấy trong JSON
@@ -183,6 +189,8 @@ def edit_medicine(id):
 
 # Xóa thuốc
 @app.route('/delete_medicine/<int:id>', methods=['POST'])
+@login_required
+@role_required( 'manager')
 def delete_medicine(id):
     medicine = Medicine.query.get_or_404(id)
     db.session.delete(medicine)
@@ -191,6 +199,8 @@ def delete_medicine(id):
 
 # Thêm khách hàng
 @app.route('/add_customer', methods=['GET', 'POST'])
+@login_required
+@role_required('staff', 'manager')
 def add_customer():
     if request.method == 'POST':
         name = request.form['name']
@@ -202,12 +212,16 @@ def add_customer():
     return render_template('add_customer.html')
 
 @app.route('/customers')
+@login_required
+@role_required('staff', 'manager')
 def list_customers():
     customers = Customer.query.all()
     return render_template('list_customers.html', customers=customers)
 
 # Thêm hóa đơn
 @app.route('/add_invoice', methods=['GET', 'POST'])
+@login_required
+@role_required('staff', 'manager')
 def add_invoice():
     customers = Customer.query.all()
     medicines = Medicine.query.all()
@@ -230,6 +244,8 @@ def calculate_total_amount(invoice):
     return invoice.quantity * medicine.price
 
 @app.route('/invoices')
+@login_required
+@role_required('staff', 'manager')
 def list_invoices():
     all_invoices = Invoice.query.all()
     invoice_details = []
@@ -250,6 +266,8 @@ def list_invoices():
     return render_template('list_invoices.html', invoices=invoice_details)
 
 @app.route('/revenue')
+@login_required
+@role_required('staff', 'manager')
 def revenue():
     # Lấy danh sách hóa đơn
     invoices = Invoice.query.order_by(Invoice.issue_date).all()
@@ -284,6 +302,8 @@ def revenue():
     return render_template('revenue.html', invoices=invoice_details, total_revenue=sum(revenues), dates=dates, revenues=revenues)
 
 @app.route('/review')
+@login_required
+@role_required('staff', 'manager')
 def review():
     try:
         with open('medicine.json', 'r', encoding='utf-8') as file:
