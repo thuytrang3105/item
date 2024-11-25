@@ -1,0 +1,52 @@
+[
+    {
+        "name_medicine": "Paracetamol ",
+        "description": "Giam dau ha sot",
+        "price": 5000.0
+    },
+    {
+        "name_medicine": "Amoxicillin ",
+        "description": "Khang sinh dieu tri nhiem khuan.",
+        "price": 25000.0
+    },
+    {
+        "name_medicine": "Vitamin C",
+        "description": "Tang suc de khang, chong met moi",
+        "price": 20000.0
+    },
+    {
+        "name_medicine": "Loperamid ",
+        "description": "Dieu tri tieu chay cap",
+        "price": 7000.0
+    },
+    {
+        "name_medicine": "Diclofenac ",
+        "description": "Giam dau, khang viem",
+        "price": 50000.0
+    },
+    {
+        "name_medicine": "Cimetidin ",
+        "description": "Dieu tri viem loet da day",
+        "price": 15000.0
+    },
+    {
+        "name_medicine": "Metformin ",
+        "description": "Dieu tri dai thao duong tuyp 2",
+        "price": 70000.0
+    },
+    {
+        "name_medicine": "Diazepam ",
+        "description": "An than, dieu tri mat ngu , co giat ",
+        "price": 15000.0
+    },
+    {
+        "name_medicine": "Clorpheniramin",
+        "description": "Dieu tri di ung, giam ngua",
+        "price": 3000.0
+    },
+    {
+        "name_medicine": "Omeprazol ",
+        "description": "Dieu tri trao nguoc da day - thuc quan",
+        "price": 40000.0
+    }
+]

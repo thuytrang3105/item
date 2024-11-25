@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models import User,Medicine, Customer, Invoice
 from datetime import datetime
 from functools import wraps
+import json 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pharmacy.db'
@@ -26,6 +27,13 @@ def load_user(user_id):
 #login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # Nếu người dùng đã đăng nhập, chuyển hướng họ đến trang phù hợp
+    if current_user.is_authenticated:
+        if current_user.role == 'manager':
+            return redirect(url_for('manage'))
+        elif current_user.role == 'employee':
+            return redirect(url_for('dashboard'))
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -40,6 +48,7 @@ def login():
                 return redirect(url_for('dashboard'))
         else:
             flash('Thông tin đăng nhập không hợp lệ', 'danger')
+
     return render_template('login.html')
 
 #logout
@@ -96,6 +105,7 @@ def dashboard():
 def list_medicines ():
     medicines = Medicine.query.all()
     return render_template('list_medicines.html', medicines=medicines)
+
 #Thêm Thuốc
 @app.route('/add_medicine', methods=['GET', 'POST'])
 def add_medicine():
@@ -104,23 +114,72 @@ def add_medicine():
         price = float(request.form['price'])
         quantity = int(request.form['quantity'])
         expiry_date = request.form['expiry_date']
+        description = request.form['description']
+        # Lưu thuốc vào cơ sở dữ liệu
         new_medicine = Medicine(name=name, price=price, quantity=quantity, expiry_date=expiry_date)
         db.session.add(new_medicine)
         db.session.commit()
+        # Ghi thông tin description và name vào file JSON
+        data = {"name_medicine": name, "description": description, "price": price}
+        
+        try:
+            # Đọc dữ liệu cũ nếu file tồn tại
+            with open('medicine.json', 'r',encoding='utf-8') as file:
+                medicines = json.load(file)
+        except FileNotFoundError:
+            medicines = []
+
+        # Thêm dữ liệu mới
+        medicines.append(data)
+
+        # Ghi lại file JSON
+        with open('medicine.json', 'w', encoding='utf-8') as file:
+            json.dump(medicines, file, indent=4)
         return redirect(url_for('list_medicines'))
     return render_template('add_medicine.html')
-#sửa thuốc
+
 @app.route('/edit_medicine/<int:id>', methods=['GET', 'POST'])
 def edit_medicine(id):
     medicine = Medicine.query.get_or_404(id)
+    description = ""  # Mặc định để rỗng nếu không tìm thấy trong JSON
+
+    # Đọc description từ file JSON khi tải form
+    try:
+        with open('medicine.json', 'r', encoding='utf-8') as file:
+            medicines = json.load(file)
+            for med in medicines:
+                if med['name_medicine'] == medicine.name:
+                    description = med['description']
+                    break
+    except FileNotFoundError:
+        medicines = []
+
     if request.method == 'POST':
+        # Cập nhật thông tin thuốc
         medicine.name = request.form['name']
         medicine.price = float(request.form['price'])
         medicine.quantity = int(request.form['quantity'])
         medicine.expiry_date = request.form['expiry_date']
+        description = request.form['description']
         db.session.commit()
+
+        # Cập nhật thông tin trong file JSON
+        updated = False
+        for med in medicines:
+            if med['name_medicine'] == medicine.name:
+                med['description'] = description
+                med['price'] = medicine.price
+                updated = True
+                break
+        if not updated:
+            medicines.append({"name_medicine": medicine.name, "description": description, "price": medicine.price})
+
+        with open('medicine.json', 'w', encoding='utf-8') as file:
+            json.dump(medicines, file, indent=4)
         return redirect(url_for('list_medicines'))
-    return render_template('edit_medicine.html', medicine=medicine)
+
+    return render_template('edit_medicine.html', medicine=medicine, description=description)
+
 
 # Xóa thuốc
 @app.route('/delete_medicine/<int:id>', methods=['POST'])
@@ -224,6 +283,14 @@ def revenue():
 
     return render_template('revenue.html', invoices=invoice_details, total_revenue=sum(revenues), dates=dates, revenues=revenues)
 
+@app.route('/review')
+def review():
+    try:
+        with open('medicine.json', 'r', encoding='utf-8') as file:
+            medicines = json.load(file)
+        return render_template('description.html',medicines=medicines)
+    except FileNotFoundError:
+        return render_template('description.html')
 
 
 
