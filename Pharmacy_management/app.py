@@ -60,11 +60,11 @@ def logout():
     return redirect(url_for('login'))
 
 #Decorator Phan quyen
-def role_required(role):
+def role_required(*roles):  # Sử dụng *roles để nhận nhiều tham số
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            if current_user.role != role:
+            if current_user.role not in roles:  # Kiểm tra xem role của người dùng có nằm trong danh sách roles không
                 flash('Bạn không có quyền truy cập trang này.', 'danger')
                 return redirect(url_for('home'))
             return func(*args, **kwargs)
