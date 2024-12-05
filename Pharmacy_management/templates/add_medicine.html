@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Thuốc</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h1>Thêm Thuốc Mới</h1>
+    <form action="{{ url_for('add_medicine') }}" method="POST">
+        <label for="name">Tên Thuốc:</label><br>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="description ">Công dụng:</label><br>
+        <input type="text" id="description" name="description" required><br>
+
+        <label for="price">Giá:</label><br>
+        <input type="text" id="price" name="price" required><br>
+
+        <label for="quantity">Số Lượng:</label><br>
+        <input type="text" id="quantity" name="quantity" required><br>
+
+        <label for="expiry_date">Hạn Sử Dụng:</label><br>
+        <input type="text" id="expiry_date" name="expiry_date"><br><br>
+
+        <button type="submit">Thêm Thuốc</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Thuốc</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h1>Bảng Thông Tin Thuốc</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Tên Thuốc</th>
+                <th>Giá Thuốc</th>
+                <th>Mô Tả</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if medicines %}
+                {% for medicine in medicines %}
+                    <tr>
+                        <td>{{ medicine.name_medicine }}</td>
+                        <td>{{ medicine.price }}</td>
+                        <td>{{ medicine.description }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3">Không có thông tin thuốc.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>

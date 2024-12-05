@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Báo Cáo Doanh Thu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <a href="\login" class="exit-button">Thoát Trang</a>
+    <div class="container">
+        <h1>Báo Cáo Doanh Thu</h1>
+        <div class="revenue-summary">
+            <h2>Tổng Doanh Thu: {{ total_revenue }} VND</h2>
+        </div>
+        
+        <!-- Phần biểu đồ -->
+        <h3>Biểu Đồ Doanh Thu Theo Ngày</h3>
+        <canvas id="revenueChart" width="800" height="400"></canvas>
+        
+        <h3>Chi Tiết Hóa Đơn</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Ngày Tạo</th>
+                <th>Tên Khách Hàng</th>
+                <th>Tổng Tiền (VND)</th>
+            </tr>
+            {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice.id }}</td>
+                <td>{{ invoice.issue_date }}</td>
+                <td>{{ invoice.customer_name }}</td>
+                <td>{{ invoice.total_amount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- JavaScript vẽ biểu đồ -->
+    <script>
+        // Lấy dữ liệu từ Flask
+        const labels = {{ dates | tojson }};
+        const data = {{ revenues | tojson }};
+
+        // Vẽ biểu đồ bằng Chart.js
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctx, {
+            type: 'line', // Hoặc 'bar' nếu muốn dùng biểu đồ cột
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Doanh Thu (VND)',
+                    data: data,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 2,
+                    tension: 0.4, // Đường cong của biểu đồ
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw.toLocaleString() + ' VND';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString() + ' VND';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

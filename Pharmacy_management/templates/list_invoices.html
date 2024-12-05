@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Hóa Đơn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h1>Danh Sách Hóa Đơn</h1>
+    <a href="/login" class="exit-button">Thoát Trang</a>
+    <a href="{{ url_for('add_invoice') }}">Thêm Hóa Đơn</a>
+    <table border="1">
+        <tr>
+            <th>Khách Hàng</th>
+            <th>Thuốc</th>
+            <th>Số Lượng</th>
+            <th>Ngày Xuất</th>
+        </tr>
+        {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice.customer_name }}</td>
+            <td>{{ invoice.medicine_name }}</td>
+            <td>{{ invoice.quantity }}</td>
+            <td>{{ invoice.issue_date }}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+    <a href="{{ url_for('review') }}">Thông tin thuốc </a> 
+</body>
+</html>

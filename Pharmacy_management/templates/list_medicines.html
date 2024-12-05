@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Thuốc</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h1>Danh Sách Thuốc</h1>
+    <a href="/login" class="exit-button">Thoát Trang</a>
+    <a href="{{ url_for('add_medicine') }}">Thêm Thuốc</a>
+    <table border="1">
+        <tr>
+            <th>Tên Thuốc</th>
+            <th>Giá</th>
+            <th>Số Lượng</th>
+            <th>Hạn Sử Dụng</th>
+            <th>Hành Động</th>
+        </tr>
+        {% for medicine in medicines %}
+        <tr>
+            <td>{{ medicine.name }}</td>
+            <td>{{ medicine.price }}</td>
+            <td>{{ medicine.quantity }}</td>
+            <td>{{ medicine.expiry_date }}</td>
+            <td>
+                <a href="{{ url_for('edit_medicine', id=medicine.id) }}">Sửa</a>
+                <form action="{{ url_for('delete_medicine', id=medicine.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa thuốc này?');">Xóa</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>

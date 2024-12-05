@@ -1,0 +1,114 @@
+/* style.css */
+
+/* Đặt font và nền mặc định */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #d6dce2;
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #2986bb;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+table {
+    width: 80%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+button, input[type="text"], input[type="submit"] {
+    padding: 8px 12px;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 18px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+
+button:hover {
+    background-color: #45a049;
+}
+
+.exit-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background-color: #FFC107; /* Màu vàng */
+    border: none;
+    border-radius: 50px; /* Bo tròn oval */
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.exit-button:hover {
+    background-color: #FFB300; /* Màu vàng đậm hơn khi hover */
+    transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+}
+
+.exit-button:active {
+    background-color: #FFA000; /* Màu khi nhấn nút */
+    transform: scale(1); /* Trở lại kích thước ban đầu */
+}
+
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+}
+
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+}
