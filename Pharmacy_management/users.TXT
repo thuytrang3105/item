@@ -1,2 +1,0 @@
-admin - admin123 # username và pass của quản lý
-staff - staff123 # username và pass của nhân viên
