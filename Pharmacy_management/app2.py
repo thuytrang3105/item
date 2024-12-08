@@ -27,27 +27,8 @@ def load_user(user_id):
 #login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # Nếu người dùng đã đăng nhập, chuyển hướng họ đến trang phù hợp
-    if current_user.is_authenticated:
-        if current_user.role == 'manager':
-            return redirect(url_for('manage'))
-        elif current_user.role == 'employee':
-            return redirect(url_for('dashboard'))
-
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        user = User.query.filter_by(username=username).first()
-
-        if user and check_password_hash(user.password, password):
-            login_user(user)
-            flash('Đăng nhập thành công!', 'success')
-            if user.role == 'manager':
-                return redirect(url_for('manage'))
-            elif user.role == 'employee':
-                return redirect(url_for('dashboard'))
-        else:
-            flash('Thông tin đăng nhập không hợp lệ', 'danger')
+        return render_template('home_manager.html')
 
     return render_template('login.html')
 
@@ -59,31 +40,6 @@ def logout():
     flash('Bạn đã đăng xuất!', 'info')
     return redirect(url_for('login'))
 
-#Decorator Phan quyen
-def role_required(*roles):  # Sử dụng *roles để nhận nhiều tham số
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            if current_user.role not in roles:  # Kiểm tra xem role của người dùng có nằm trong danh sách roles không
-                flash('Bạn không có quyền truy cập trang này.', 'danger')
-                return redirect(url_for('home'))
-            return func(*args, **kwargs)
-        return wrapper
-    return decorator
-
-#Route phân quyền
-@app.route('/manage', methods=['GET'])
-@login_required
-@role_required('manager')  # Chỉ quản lý có quyền
-def manage():
-    return render_template('home_manager.html')
-
-@app.route('/dashboard', methods=['GET'])
-@login_required
-@role_required('employee')  # Chỉ nhân viên có quyền
-def dashboard():
-    return render_template('home_employee.html')
-
 
 # Tạo các bảng cơ sở dữ liệu nếu chưa có
 with app.app_context():
@@ -92,7 +48,7 @@ with app.app_context():
 @app.route('/')
 def home():
     return render_template('home.html')
-"""
+
 @app.route('/manager')
 def manager():
     return render_template('home_manager.html')
@@ -100,18 +56,14 @@ def manager():
 @app.route('/employee')
 def dashboard():
     return render_template('home_employee.html')
-"""
+
 @app.route('/medicines')
-@login_required
-@role_required('manager')
 def list_medicines ():
     medicines = Medicine.query.all()
     return render_template('list_medicines.html', medicines=medicines)
 
 #Thêm Thuốc
 @app.route('/add_medicine', methods=['GET', 'POST'])
-@login_required
-@role_required( 'manager')
 def add_medicine():
     if request.method == 'POST':
         name = request.form['name']
@@ -143,8 +95,6 @@ def add_medicine():
     return render_template('add_medicine.html')
 
 @app.route('/edit_medicine/<int:id>', methods=['GET', 'POST'])
-@login_required
-@role_required('manager')
 def edit_medicine(id):
     medicine = Medicine.query.get_or_404(id)
     description = ""  # Mặc định để rỗng nếu không tìm thấy trong JSON
@@ -189,8 +139,6 @@ def edit_medicine(id):
 
 # Xóa thuốc
 @app.route('/delete_medicine/<int:id>', methods=['POST'])
-@login_required
-@role_required( 'manager')
 def delete_medicine(id):
     medicine = Medicine.query.get_or_404(id)
     db.session.delete(medicine)
@@ -199,8 +147,6 @@ def delete_medicine(id):
 
 # Thêm khách hàng
 @app.route('/add_customer', methods=['GET', 'POST'])
-@login_required
-@role_required('staff', 'manager')
 def add_customer():
     if request.method == 'POST':
         name = request.form['name']
@@ -212,16 +158,12 @@ def add_customer():
     return render_template('add_customer.html')
 
 @app.route('/customers')
-@login_required
-@role_required('staff', 'manager')
 def list_customers():
     customers = Customer.query.all()
     return render_template('list_customers.html', customers=customers)
 
 # Thêm hóa đơn
 @app.route('/add_invoice', methods=['GET', 'POST'])
-@login_required
-@role_required('staff', 'manager')
 def add_invoice():
     customers = Customer.query.all()
     medicines = Medicine.query.all()
@@ -244,8 +186,6 @@ def calculate_total_amount(invoice):
     return invoice.quantity * medicine.price
 
 @app.route('/invoices')
-@login_required
-@role_required('staff', 'manager')
 def list_invoices():
     all_invoices = Invoice.query.all()
     invoice_details = []
@@ -266,8 +206,6 @@ def list_invoices():
     return render_template('list_invoices.html', invoices=invoice_details)
 
 @app.route('/revenue')
-@login_required
-@role_required('staff', 'manager')
 def revenue():
     # Lấy danh sách hóa đơn
     invoices = Invoice.query.order_by(Invoice.issue_date).all()
@@ -302,8 +240,6 @@ def revenue():
     return render_template('revenue.html', invoices=invoice_details, total_revenue=sum(revenues), dates=dates, revenues=revenues)
 
 @app.route('/review')
-@login_required
-@role_required('staff', 'manager')
 def review():
     try:
         with open('medicine.json', 'r', encoding='utf-8') as file:

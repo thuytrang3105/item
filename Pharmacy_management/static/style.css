@@ -13,66 +13,267 @@ body {
     min-height: 100vh;
 }
 
-h1 {
-    color: #333;
+.medicine-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-a {
-    text-decoration: none;
-    color: #d6dce2;
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 18px;
-    background-color: #2986bb;
-    border: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-table {
-    width: 80%;
-    margin: 20px 0;
-    border-collapse: collapse;
-    background-color: #fff;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
+/* Tiêu đề */
+.title {
     text-align: center;
+    color: #2e7d32;
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
-th {
-    background-color: #4CAF50;
-    color: white;
+/* Button hành động */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-button, input[type="text"], input[type="submit"] {
-    padding: 8px 12px;
-    margin: 5px 0;
+.exit-button, .add-button {
+    padding: 10px 20px;
     font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
-.button {
+.exit-button {
+    background: #e53935; /* Màu đỏ */
+}
+
+.exit-button:hover {
+    background: #b71c1c;
+}
+
+.add-button {
+    background: #4caf50; /* Xanh lá */
+}
+
+.add-button:hover {
+    background: #388e3c;
+}
+
+/* Bảng thuốc */
+.medicine-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.medicine-table thead {
+    background: #388e3c;
+    color: #ffffff;
+}
+
+.medicine-table th, .medicine-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #c8e6c9;
+}
+
+.medicine-table tbody tr:nth-child(even) {
+    background: #f1f8e9;
+}
+
+.medicine-table tbody tr:hover {
+    background: #dcedc8;
+}
+
+/* Hành động */
+.action-column {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.action-column {
+    display: flex; /* Sử dụng flexbox để căn chỉnh */
+    justify-content: center; /* Canh giữa các nút */
+    align-items: center; /* Canh giữa theo trục dọc */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    padding: 5px; /* Thêm khoảng cách bên trong */
+}
+.edit-button {
+    padding: 8px 15px; /* Kích thước nút */
+    font-size: 14px; /* Kích thước chữ */
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    background: #43a047; /* Màu xanh sửa */
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
+}
+
+.edit-button:hover {
+    background: #2e7d32;
+}
+
+.delete-button {
+    background: #e53935; /* Màu xóa */
+   
+}
+
+.delete-button:hover {
+    background: #b71c1c;
+}
+
+.delete-form {
+   
+    margin: 0; /* Loại bỏ khoảng cách thừa */
+    padding: 0; /* Đảm bảo không có khoảng padding thừa */
+    text-align: center; /* Canh giữa nội dung */
+}
+
+/* Nút xóa */
+.delete-button {
+    padding: 6px 12px; /* Điều chỉnh kích thước nút */
+    font-size: 14px;   /* Kích thước chữ vừa đủ */
+    border: none;      /* Loại bỏ viền mặc định */
+    border-radius: 5px; /* Bo tròn góc */
+    background: #e53935; /* Màu đỏ nút xóa */
+    color: #ffffff;     /* Chữ màu trắng */
+    cursor: pointer;    /* Hiển thị con trỏ chuột khi hover */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
+    display: inline-block; /* Cân đối nút */
+    height: auto; /* Tự động điều chỉnh chiều cao */
+    width: auto; 
+    margin-top: 7px;
+}
+
+/* Hiệu ứng khi hover nút xóa */
+.delete-button:hover {
+    background: #b71c1c; /* Đổi sang màu đỏ đậm khi hover */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Thêm bóng mờ */
+}
+
+
+
+/* Container chính */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+/* Nút Logout */
+.exit-button {
     display: inline-block;
-    padding: 15px 30px;
-    font-size: 18px;
-    color: white;
-    background-color: #4CAF50;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: #e74c3c;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.exit-button:hover {
+    background: #c0392b;
+}
+
+/* Thanh điều hướng */
+.nav-bar {
+    margin-top: 40px;
+    background: #2c3e50;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-bar nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.nav-item {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Danh sách menu */
+.nav-bar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.nav-bar ul hr {
+    margin: 10px 0;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-bar ul li {
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* Nút điều hướng */
+.choice_btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(to right, #4CAF50, #4CAF50);
     border: none;
     border-radius: 8px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+}
+
+.choice_btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right, #5dade2, #3498db);
+}
+
+.choice_btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 
-button:hover {
-    background-color: #45a049;
-}
 
 .exit-button {
     display: inline-block;
@@ -111,4 +312,446 @@ form {
 input[type="text"] {
     width: 100%;
     box-sizing: border-box;
+}
+/* end phần css main menu */
+
+/* start form login */
+/* Form đăng nhập */
+form {
+    background: #ffffff; /* Nền trắng cho form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+label.name_lg, label.text_lg {
+    font-size: 16px;
+    font-weight: bold;
+    color: #388e3c; /* Xanh lá đậm hơn */
+    margin-bottom: 8px;
+    display: block;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #c8e6c9; /* Viền xanh nhạt */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background: #f1f8e9; /* Nền xanh nhạt */
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #66bb6a; /* Viền xanh đậm hơn khi focus */
+    box-shadow: 0 0 5px rgba(102, 187, 106, 0.6);
+    outline: none;
+}
+
+/* Nút đăng nhập */
+button.btn_lg {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(to right, #66bb6a, #2e7d32); /* Gradient xanh lá đậm */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button.btn_lg:hover {
+    background: linear-gradient(to right, #43a047, #2e7d32); /* Hiệu ứng hover đậm màu hơn */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+button.btn_lg:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+/* end form */
+
+/* css cho form add khách hàng  */
+
+
+
+/* start xem danh sách khách hàng  */
+.customer-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Tiêu đề danh sách */
+.customer-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+/* Button hành động */
+.customer-action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.customer-exit-button, .customer-add-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.customer-exit-button {
+    background-color: #e53935; /* Màu đỏ */
+}
+
+.customer-exit-button:hover {
+    background-color: #b71c1c;
+}
+
+.customer-add-button {
+    background-color: #4caf50; /* Màu xanh */
+}
+
+.customer-add-button:hover {
+    background-color: #388e3c;
+}
+
+/* Bảng khách hàng */
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.customer-table thead {
+    background-color: #388e3c;
+    color: #ffffff;
+}
+
+.customer-header {
+    padding: 12px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #c8e6c9;
+}
+
+.customer-data {
+    padding: 12px 15px;
+    font-size: 14px;
+    border: 1px solid #c8e6c9;
+    text-align: center;
+}
+
+.customer-table tbody tr:nth-child(even) {
+    background-color: #f1f8e9;
+}
+
+.customer-table tbody tr:hover {
+    background-color: #dcedc8;
+}
+/* end xem ds khách hàng */
+
+/* add  ds cústomer*/
+/* Toàn bộ container */
+.form-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Tiêu đề form */
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+/* Nhóm form */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Label */
+.form-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Input */
+.form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: #2e7d32;
+    outline: none;
+}
+
+/* Button */
+.form-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #4caf50; /* Xanh lá */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+    background-color: #388e3c;
+}
+
+/* end add cútommer */
+
+
+
+/* thông tin veef thuôc */
+/* Container toàn bộ hóa đơn */
+.invoice-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Tiêu đề hóa đơn */
+.invoice-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+/* Các nút hành động */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.exit-button, .add-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.exit-button {
+    background-color: #e53935; /* Đỏ */
+}
+
+.exit-button:hover {
+    background-color: #b71c1c;
+}
+
+.add-button {
+    background-color: #4caf50; /* Xanh lá */
+}
+
+.add-button:hover {
+    background-color: #388e3c;
+}
+
+/* Bảng hóa đơn */
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.invoice-table thead {
+    background-color: #388e3c;
+    color: #ffffff;
+}
+
+.invoice-table th, .invoice-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.invoice-table tbody tr:nth-child(even) {
+    background-color: #f1f8e9;
+}
+
+.invoice-table tbody tr:hover {
+    background-color: #dcedc8;
+}
+
+/* Footer link */
+.footer-links {
+    margin-top: 20px;
+}
+
+.info-link {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #2196f3; /* Xanh dương */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.info-link:hover {
+    background-color: #1e88e5;
+}
+/* end thông tin thuốc */
+
+/* thông tin thuôc start */
+/* Container của bảng thông tin thuốc */
+.medicine-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề bảng */
+.medicine-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #3f51b5;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Bảng thông tin thuốc */
+.medicine-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.medicine-table thead {
+    background-color: #3f51b5;
+    color: #ffffff;
+}
+
+.medicine-table th, .medicine-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.medicine-table tbody tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.medicine-table tbody tr:hover {
+    background-color: #e8eaf6;
+}
+
+.medicine-table th {
+    font-weight: bold;
+    text-align: center;
+}
+
+.medicine-table .no-data {
+    text-align: center;
+    color: #d32f2f;
+    font-style: italic;
+}
+
+/* Định dạng giá tiền */
+.medicine-table td:nth-child(2) {
+    text-align: right;
+    font-weight: bold;
+    color: #4caf50;
+}
+/* login start */
+.container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tiêu đề */
+.container h1 {
+    font-size: 28px;
+    color: #3f51b5;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Khu vực nút */
+.button-container {
+    margin-top: 20px;
+}
+
+/* Nút LOGIN */
+.button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #3f51b5;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover và Active cho nút */
+.button:hover {
+    background-color: #303f9f;
+}
+
+.button:active {
+    background-color: #283593;
+    transform: scale(0.98);
 }

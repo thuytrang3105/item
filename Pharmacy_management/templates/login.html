@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>Đăng nhập</h2>
+    <h2 class = "login_a">Đăng nhập</h2>
     <form method="POST">
-        <label for="username">Tên đăng nhập:</label>
+        <label for="username" class ="name_lg">Tên đăng nhập:</label>
         <input type="text" id="username" name="username" required>
         <br>
-        <label for="password">Mật khẩu:</label>
+        <label for="password" class ="text_lg">Mật khẩu:</label>
         <input type="password" id="password" name="password" required>
         <br>
-        <button type="submit">Đăng nhập</button>
+        <button type="submit" class="btn_lg">Đăng nhập</button>
     </form>
 </body>
 </html>

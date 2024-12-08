@@ -7,31 +7,32 @@
 
 </head>
 <body>
-    <h1>Bảng Thông Tin Thuốc</h1>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Tên Thuốc</th>
-                <th>Giá Thuốc</th>
-                <th>Mô Tả</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if medicines %}
-                {% for medicine in medicines %}
-                    <tr>
-                        <td>{{ medicine.name_medicine }}</td>
-                        <td>{{ medicine.price }}</td>
-                        <td>{{ medicine.description }}</td>
-                    </tr>
-                {% endfor %}
-            {% else %}
+    <div class="medicine-container">
+        <h1 class="medicine-title">Bảng Thông Tin Thuốc</h1>
+        <table class="medicine-table">
+            <thead>
                 <tr>
-                    <td colspan="3">Không có thông tin thuốc.</td>
+                    <th>Tên Thuốc</th>
+                    <th>Giá Thuốc</th>
+                    <th>Mô Tả</th>
                 </tr>
-            {% endif %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% if medicines %}
+                    {% for medicine in medicines %}
+                        <tr>
+                            <td>{{ medicine.name_medicine }}</td>
+                            <td>{{ medicine.price }}</td>
+                            <td>{{ medicine.description }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="no-data">Không có thông tin thuốc.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
